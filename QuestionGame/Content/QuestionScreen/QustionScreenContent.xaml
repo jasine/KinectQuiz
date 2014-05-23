@@ -1,0 +1,65 @@
+﻿<List x:TypeArguments="mskbm:QuestionModel" 
+      Capacity="4"
+      xmlns="clr-namespace:System.Collections.Generic;assembly=mscorlib" 
+      xmlns:mskbm="clr-namespace:Microsoft.Samples.Kinect.InteractionGallery.Models;assembly=QuestionGame"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <mskbm:QuestionModel Title="敦煌学第一部分类目录《敦煌劫馀录》是 ____ 主持修订的" 
+                         RightChoiceIndex="0"
+                         ExplainText="《敦煌劫馀录》是陈垣先生于XXXX年主持修订完成的  ...... ..... .... ......" >
+        <mskbm:QuestionModel.Answers>
+            <List x:TypeArguments="mskbm:QuestionChoiceModel">
+                <mskbm:QuestionChoiceModel Text="陈垣"></mskbm:QuestionChoiceModel>
+                <mskbm:QuestionChoiceModel Text="陈寅恪"></mskbm:QuestionChoiceModel>
+            </List>
+        </mskbm:QuestionModel.Answers>
+    </mskbm:QuestionModel>
+    <mskbm:QuestionModel Title="梁思成林徽因夫妇在敦煌莫高窟第61窟五台山图中发现，随后按图索骥找到的现存最大型唐代木构建筑是___ "
+                         RightChoiceIndex="1" 
+                         ExplainText="佛光寺位于中国山西省五台县豆村镇佛光村，建于唐大中十一年（857年），是中国现存第二古老的木结构建筑">
+        <mskbm:QuestionModel.Answers>
+            <List x:TypeArguments="mskbm:QuestionChoiceModel">
+                <mskbm:QuestionChoiceModel Text="南禅寺">
+                    <mskbm:QuestionChoiceModel.ImageUri>
+                        <x:Uri>pack://application:,,,/Content/ArticleScreen/beach.jpg</x:Uri>
+                    </mskbm:QuestionChoiceModel.ImageUri>
+                </mskbm:QuestionChoiceModel>
+                <mskbm:QuestionChoiceModel Text="佛光寺">
+                    <mskbm:QuestionChoiceModel.ImageUri>
+                        <x:Uri>pack://application:,,,/Content/ArticleScreen/hamlet.jpg</x:Uri>
+                    </mskbm:QuestionChoiceModel.ImageUri>
+                </mskbm:QuestionChoiceModel>
+                <mskbm:QuestionChoiceModel Text="清凉寺">
+                    <mskbm:QuestionChoiceModel.ImageUri>
+                        <x:Uri>pack://application:,,,/Content/ArticleScreen/sydney.jpg</x:Uri>
+                    </mskbm:QuestionChoiceModel.ImageUri>
+                </mskbm:QuestionChoiceModel>
+            </List>
+        </mskbm:QuestionModel.Answers>
+
+    </mskbm:QuestionModel>
+    <mskbm:QuestionModel Title="以下哪一尊塑像是在敦煌藏经洞的洪辩高僧的真容像 "
+                         RightChoiceIndex="1" 
+                         ExplainText="洪辨高僧像，是敦煌彩塑代表作之一，位于莫高窟第17窟（藏经洞）北壁前禅床上。唐大中五年至咸通三年（851-862）间塑造">
+        <mskbm:QuestionModel.Answers>
+            <List x:TypeArguments="mskbm:QuestionChoiceModel">
+                <mskbm:QuestionChoiceModel >
+                    <mskbm:QuestionChoiceModel.ImageUri>
+                        <x:Uri>pack://application:,,,/Content/QuestionScreen/Question5/5.1.png</x:Uri>
+                    </mskbm:QuestionChoiceModel.ImageUri>
+                </mskbm:QuestionChoiceModel>
+                <mskbm:QuestionChoiceModel >
+                    <mskbm:QuestionChoiceModel.ImageUri>
+                        <x:Uri>pack://application:,,,/Content/QuestionScreen/Question5/5.2.png</x:Uri>
+                    </mskbm:QuestionChoiceModel.ImageUri>
+                </mskbm:QuestionChoiceModel>
+                <mskbm:QuestionChoiceModel>
+                    <mskbm:QuestionChoiceModel.ImageUri>
+                        <x:Uri>pack://application:,,,/Content/QuestionScreen/Question5/5.3.png</x:Uri>
+                    </mskbm:QuestionChoiceModel.ImageUri>
+                </mskbm:QuestionChoiceModel>
+            </List>
+        </mskbm:QuestionModel.Answers>
+
+    </mskbm:QuestionModel>
+</List>
