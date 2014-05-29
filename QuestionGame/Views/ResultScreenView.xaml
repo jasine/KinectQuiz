@@ -6,6 +6,67 @@
              xmlns:k="http://schemas.microsoft.com/kinect/2013"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920">
+	<UserControl.Resources>
+		<Storyboard x:Key="OnLoaded1">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(SkewTransform.AngleY)" Storyboard.TargetName="textBlock">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="textBlock">
+				<EasingDoubleKeyFrame KeyTime="0" Value="-1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="kinectTileButton">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.8" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="kinectTileButton">
+				<EasingPointKeyFrame KeyTime="0" Value="0,0"/>
+				<EasingPointKeyFrame KeyTime="0:0:0.9" Value="0,0"/>
+				<EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5"/>
+				<EasingPointKeyFrame KeyTime="0:0:1.8" Value="0.5,0.5"/>
+			</PointAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="kinectTileButton">
+				<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.8" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="kinectTileButton1">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.8" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="kinectTileButton1">
+				<EasingPointKeyFrame KeyTime="0:0:0.9" Value="0,0"/>
+				<EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5"/>
+				<EasingPointKeyFrame KeyTime="0:0:1.8" Value="0.5,0.5"/>
+			</PointAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="kinectTileButton1">
+				<EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.8" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="kinectTileButton">
+				<EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="-1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.8" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="kinectTileButton1">
+				<EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="-1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.8" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard Storyboard="{StaticResource OnLoaded1}"/>
+		</EventTrigger>
+	</UserControl.Triggers>
 	<UserControl.Background>
 		<ImageBrush ImageSource="pack://application:,,,/Content/ResultScreen/background.png"></ImageBrush>
 	</UserControl.Background>
@@ -16,7 +77,15 @@
         </Grid.RowDefinitions>
        
        
-        <TextBlock Grid.Row="0" Margin="100,0" FontSize="80" TextWrapping="WrapWithOverflow"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ResultText}" FontFamily="KaiTi">
+        <TextBlock x:Name="textBlock" Grid.Row="0" Margin="100,0" FontSize="80" TextWrapping="WrapWithOverflow"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ResultText}" FontFamily="KaiTi" RenderTransformOrigin="0.5,0.5">
+        	<TextBlock.RenderTransform>
+        		<TransformGroup>
+        			<ScaleTransform/>
+        			<SkewTransform/>
+        			<RotateTransform/>
+        			<TranslateTransform/>
+        		</TransformGroup>
+        	</TextBlock.RenderTransform>
         	<TextBlock.Effect>
         		<DropShadowEffect/>
         	</TextBlock.Effect>
@@ -32,15 +101,39 @@
                     <ColumnDefinition/>
 					<ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <k:KinectTileButton HorizontalAlignment="Center" Width="250"  Background="Transparent" BorderThickness="0" Command="{Binding RestartCommand}" Grid.Column="0" >
+                <k:KinectTileButton x:Name="kinectTileButton" HorizontalAlignment="Center" Width="250"  Background="Transparent" BorderThickness="0" Command="{Binding RestartCommand}" Grid.Column="0" >
+                	<k:KinectTileButton.RenderTransform>
+                		<TransformGroup>
+                			<ScaleTransform/>
+                			<SkewTransform/>
+                			<RotateTransform/>
+                			<TranslateTransform/>
+                		</TransformGroup>
+                	</k:KinectTileButton.RenderTransform>
 				<Image  x:Name="restart"  Source="pack://application:,,,/Content/ResultScreen/restart.png" Grid.Column="0" />
 				</k:KinectTileButton>
-                <k:KinectTileButton   Width="250"  HorizontalAlignment="Center" Background="Transparent" BorderThickness="0" Command="{Binding BackCommand}" Grid.Column="1">
+                <k:KinectTileButton x:Name="kinectTileButton1"   Width="250"  HorizontalAlignment="Center" Background="Transparent" BorderThickness="0" Command="{Binding BackCommand}" Grid.Column="1">
+                	<k:KinectTileButton.RenderTransform>
+                		<TransformGroup>
+                			<ScaleTransform/>
+                			<SkewTransform/>
+                			<RotateTransform/>
+                			<TranslateTransform/>
+                		</TransformGroup>
+                	</k:KinectTileButton.RenderTransform>
 					 <Image x:Name="back" Source="pack://application:,,,/Content/ResultScreen/back.png" Grid.Column="1" />
 				</k:KinectTileButton>
             </Grid>
         </Grid>
-		<TextBlock Margin="0,0,10,15" Grid.Row="1" Foreground="White" FontSize="30" Text="兰州大学先进计算实验室提供技术支持" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<TextBlock x:Name="textBlock1" Margin="0,0,10,15" Grid.Row="1" Foreground="White" FontSize="30" Text="兰州大学先进计算实验室提供技术支持" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+			<TextBlock.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</TextBlock.RenderTransform>
 			<TextBlock.Effect>
 				<DropShadowEffect/>
 			</TextBlock.Effect></TextBlock>

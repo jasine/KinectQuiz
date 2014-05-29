@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Media.Imaging;
 
 namespace Microsoft.Samples.Kinect.InteractionGallery.Models
 {
@@ -9,7 +10,7 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.Models
     {
 
         public string Text { get; set; }
-        public Uri ImageUri { get; set; }
+        public BitmapImage AttachImage { get; set; }
         
     }
 }

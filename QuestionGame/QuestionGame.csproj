@@ -346,6 +346,21 @@
       <Name>Microsoft.Kinect.Toolkit</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\QuestionScreen\downContent.png" />
+    <Resource Include="Content\QuestionScreen\downScroll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\QuestionScreen\Question3\3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\QuestionScreen\frame2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\QuestionScreen\buttonDown2.png" />
+    <Resource Include="Content\QuestionScreen\buttonResult2.png" />
+    <Resource Include="Content\QuestionScreen\buttonUp2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

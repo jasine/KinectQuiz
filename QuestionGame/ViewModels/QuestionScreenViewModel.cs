@@ -25,7 +25,7 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
     [ExportNavigable(NavigableContextName = DefaultNavigableContexts.QuestionScreen)]
     class QuestionScreenViewModel : ViewModelBase
     {
-        internal const int EachTimeQuestionsCount = 2;//change here to change the question each user to answer
+        internal const int EachTimeQuestionsCount = 4;//change here to change the question each user to answer
         internal readonly double ResizeRatio ;//compared to 1920*1080
 
 
@@ -44,12 +44,28 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
             }
         }
 
-
+        private ObservableCollection<KinectTileButton> currentChoices;
         public ObservableCollection<KinectTileButton> CurrentChoices
         {
-            get;
-            set;
+            get { return currentChoices; }
+            set
+            {
+                currentChoices = value;
+                OnPropertyChanged("CurrentChoices");
+            }
         }
+
+        private ObservableCollection<KinectTileButton> currentChoicesLayout2;
+        public ObservableCollection<KinectTileButton> CurrentChoicesLayout2
+        {
+            get { return currentChoicesLayout2; }
+            set
+            {
+                currentChoicesLayout2 = value;
+                OnPropertyChanged("CurrentChoicesLayout2");
+            }
+        }
+
 
 
 
@@ -283,9 +299,30 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
                 OnPropertyChanged("NextButtonHeight");
             }
         }
-        
-        
 
+        private double downButtonWidth;
+
+        public double DownButtonWidth
+        {
+            get { return downButtonWidth; }
+            set
+            {
+                downButtonWidth = value; 
+                OnPropertyChanged("DownButtonWidth");
+            }
+        }
+
+        private double downButtonHeight;
+
+        public double DownButtonHeight
+        {
+            get { return downButtonHeight; }
+            set
+            {
+                downButtonHeight =value;
+                OnPropertyChanged("DownButtonHeight");
+            }
+        }
 
 
         private double brushWidth;
@@ -379,6 +416,93 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
                 OnPropertyChanged("NextButtonImage");
             }
         }
+
+
+        private Visibility firstLayoutVisibility;
+
+        public Visibility FirstLayoutVisibility
+        {
+            get { return firstLayoutVisibility; }
+            set
+            {
+                SecondLayoutVisibility = value == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+                firstLayoutVisibility = value; 
+                OnPropertyChanged("FirstLayoutVisibility");
+            }
+        }
+
+        private Visibility secondLayoutVisibility;
+
+        public Visibility SecondLayoutVisibility
+        {
+            get { return secondLayoutVisibility; }
+            set
+            {
+                secondLayoutVisibility = value;
+                OnPropertyChanged("SecondLayoutVisibility");
+            }
+        }
+
+        private double downScrollWidth;
+
+        public double DownScrollWidth
+        {
+            get { return downScrollWidth; }
+            set
+            {
+                downScrollWidth = value; 
+                OnPropertyChanged("DownScrollWidth");
+            }
+        }
+
+        private double downScrollLen;
+
+        public double DownScrollLen
+        {
+            get { return downScrollLen; }
+            set
+            {
+                downScrollLen = value; 
+                OnPropertyChanged("DownScrollLen");
+            }
+        }
+
+        private double downContentLen;
+
+        public double DownContentLen
+        {
+            get { return downContentLen; }
+            set
+            {
+                downContentLen = value;
+                OnPropertyChanged("DownScrollLen");
+            }
+        }
+
+        private ImageSource downContentImage;
+
+        public ImageSource DownContentImage
+        {
+            get { return downContentImage; }
+            set
+            {
+                downContentImage = value;
+                OnPropertyChanged("DownContentImage");
+            }
+        }
+
+        private double downContentHeight;
+
+        public double DownContentHeight
+        {
+            get { return downContentHeight; }
+            set
+            {
+                downContentHeight = value; 
+                OnPropertyChanged("DownContentHeight");
+            }
+        }
+        
         
 
         private readonly RelayCommand nextCommand;
@@ -411,19 +535,24 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
             ScrollHeight = (585.0 / 766.0) * RightScrollLen;
 
             CurrentChoices = new ObservableCollection<KinectTileButton>();
+            CurrentChoicesLayout2 = new ObservableCollection<KinectTileButton>();
             currentIndex = 0;
             CurrentQuestionGroup=new List<QuestionModel>();
 
             this.LoadModels();
-     
+
+            ResizeRatio = RightScrollLen / 766;
+
 
             const string rightContentPath = "/Content/QuestionScreen/rightContent.png";
             RightContentImage = ImageHelper.ChangeSize(rightContentPath, (int)RightScrollLen, (int)ScrollHeight,
             ImageHelper.AdjustMode.W);
 
             const string leftMaskPath = "/Content/QuestionScreen/leftBg.png";
-            ResizeRatio = RightScrollLen / 766;
             LeftMaskImage = ImageHelper.ChangeSize(leftMaskPath,ResizeRatio,ImageHelper.AdjustMode.W);
+
+            const string downContentPath = "/Content/QuestionScreen/downContent.png";
+            DownContentImage = ImageHelper.ChangeSize(downContentPath, ResizeRatio, ImageHelper.AdjustMode.W);
 
             ButtonWidth = 460.0*ResizeRatio;
 
@@ -434,7 +563,14 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
 
             NextButtonWidth = 366*ResizeRatio;
             NextButtonHeight = 240*ResizeRatio;
-            
+
+            DownScrollWidth = 598*ResizeRatio;
+            DownScrollLen = 900*ResizeRatio;
+            DownContentLen = DownScrollLen + 65*ResizeRatio;
+
+            DownButtonWidth = 460*ResizeRatio;
+            DownButtonHeight = 214*ResizeRatio;
+            DownContentHeight = 261*ResizeRatio;
 
             this.nextCommand = new RelayCommand(this.SwitchQuestion);
             this.backCommand = new RelayCommand(()=> this.NavigationManager.NavigateToHome(DefaultNavigableContexts.AttractScreen2));
@@ -446,71 +582,126 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
             {
                 ChoicesVisibility = Visibility.Visible;
                 ExplainVisibility = Visibility.Collapsed;
-
                 CurrentQuestion = CurrentQuestionGroup[CurrentIndex];
-                CurrentChoices.Clear();
-
-
-                for (int i = 0; i < CurrentQuestion.ChoiceCount; i++)
+                CurrentIndex++;
+                if (CurrentQuestion.Type == QuestionModel.QuestionType.TitleWithImage)
                 {
-                    var ktb = new KinectTileButton();
-                    ktb.Tag = i;
-
-
-                    ktb.HorizontalLabelAlignment = HorizontalAlignment.Center;
-                    ktb.VerticalLabelAlignment = VerticalAlignment.Center;
-
-                    ktb.Click += ktb_Click;
-
-                    ktb.Width = ButtonWidth;
-
-                    //ktb.LabelBackground =new SolidColorBrush( );
-                    ktb.BorderThickness = new Thickness(0, 0, 0, 0);
-
-                    ktb.Label = CurrentQuestion.Answers[i].Text;
-
-                    ImageSource frameSource = new BitmapImage(new Uri("pack://application:,,,/Content/QuestionScreen/frame.png"));                  
-                    Image frame = new Image();
-                    
-                    frame.Source = frameSource;
-                    frame.Stretch=Stretch.Fill;
-                    ktb.Content = frame;
-
-                    double margin = ((RightScrollLen*2 - CurrentQuestion.ChoiceCount*ButtonWidth)/
-                                    CurrentQuestion.ChoiceCount)/2;
-                    margin = margin - margin/4;
-
-                    ktb.Margin = new Thickness(margin, 0, margin, 0);
-
-                    ImageBrush backBrush; 
-                    if (CurrentQuestion.Answers[i].ImageUri != null)
+                    CurrentChoicesLayout2.Clear();
+                    FirstLayoutVisibility = Visibility.Collapsed;//Change FirstLayoutVisibility will change SecondLayoutVisibility automatically
+                    for (int i = 0; i < CurrentQuestion.ChoiceCount; i++)
                     {
-                        ktb.VerticalLabelAlignment=VerticalAlignment.Bottom;
-                        
-                        //ktb.Height = img.Height;                       
-                        backBrush =new ImageBrush(new BitmapImage(CurrentQuestion.Answers[i].ImageUri));
-                       
+                        var ktb = new KinectTileButton();
+                        ktb.Tag = i;
+
+                        ktb.HorizontalAlignment=HorizontalAlignment.Center;
+                        ktb.VerticalAlignment = VerticalAlignment.Center;
+                        ktb.HorizontalLabelAlignment = HorizontalAlignment.Center;           
+                        ktb.VerticalLabelAlignment = VerticalAlignment.Center;
+                        ktb.LabelBackground = new SolidColorBrush(Colors.Transparent);
+
+                        ktb.Click += ktb_Click;
+                        ktb.Height = DownContentHeight;
+                        ktb.Width = DownButtonWidth;
+
+                        ktb.BorderThickness = new Thickness(0, 0, 0, 0);
+
+                        ktb.Label = CurrentQuestion.Answers[i].Text;
+                        ImageSource frameSource = new BitmapImage(new Uri("pack://application:,,,/Content/QuestionScreen/frame2.png"));
+                        Image frame = new Image();
+
+                        frame.Source = frameSource;
+                        frame.Stretch = Stretch.Fill;
+                        ktb.Content = frame;
+
+                        double margin = ((RightScrollLen * 2 - CurrentQuestion.ChoiceCount * DownButtonWidth) /
+                                        CurrentQuestion.ChoiceCount) / 2;
+                        margin = margin - margin / 4;
+                        ktb.Margin = new Thickness(0,margin, 0, margin);
+
+                        ImageBrush backBrush = new ImageBrush(new BitmapImage(new Uri(
+                                "pack://application:,,,/Content/QuestionScreen/answerbg" + (i + 1) + ".png")));
+                        backBrush.Opacity = 0.4;
+                        backBrush.Stretch = Stretch.Fill;
+                        ktb.Background = backBrush;
+
+                        CurrentChoicesLayout2.Add(ktb);
+
+                    }
+                    if (CurrentIndex == EachTimeQuestionsCount)
+                    {
+                        NextButtonImage = new BitmapImage(new Uri("pack://application:,,,/Content/QuestionScreen/buttonResult2.png"));
                     }
                     else
                     {
-                                        
-                        backBrush=new ImageBrush( new BitmapImage(new Uri(
-                            "pack://application:,,,/Content/QuestionScreen/answerbg"+(i+1)+".png")));
-                        backBrush.Opacity = 0.4;
+                        NextButtonImage = new BitmapImage(new Uri("pack://application:,,,/Content/QuestionScreen/buttonDown2.png"));
                     }
-                    backBrush.Stretch = Stretch.Fill;
-                    ktb.Background = backBrush;
-                    CurrentChoices.Add(ktb);
-                }
-                CurrentIndex++;
-                if (CurrentIndex == EachTimeQuestionsCount)
-                {
-                    NextButtonImage = new BitmapImage(new Uri("pack://application:,,,/Content/QuestionScreen/buttonResult.png"));
                 }
                 else
                 {
-                    NextButtonImage = new BitmapImage(new Uri("pack://application:,,,/Content/QuestionScreen/buttonDown.png"));
-                }
+                    CurrentChoices.Clear();
+                    FirstLayoutVisibility = Visibility.Visible;//Change FirstLayoutVisibility will change SecondLayoutVisibility automatically
+                    for (int i = 0; i < CurrentQuestion.ChoiceCount; i++)
+                    {
+                        var ktb = new KinectTileButton();
+                        ktb.Tag = i;
+
+
+                        ktb.HorizontalLabelAlignment = HorizontalAlignment.Center;
+                        ktb.VerticalLabelAlignment = VerticalAlignment.Center;
+
+                        ktb.Click += ktb_Click;
+
+                        ktb.Width = ButtonWidth;
+                        ktb.Height = ButtonWidth/1.5;
+
+                        //ktb.LabelBackground =new SolidColorBrush( );
+                        ktb.BorderThickness = new Thickness(0, 0, 0, 0);
+
+                        ktb.Label = CurrentQuestion.Answers[i].Text;
+
+                        ImageSource frameSource = new BitmapImage(new Uri("pack://application:,,,/Content/QuestionScreen/frame.png"));
+                        Image frame = new Image();
+
+                        frame.Source = frameSource;
+                        frame.Stretch = Stretch.Fill;
+                        ktb.Content = frame;
+
+                        double margin = ((RightScrollLen * 2 - CurrentQuestion.ChoiceCount * ButtonWidth) /
+                                        CurrentQuestion.ChoiceCount) / 2;
+                        margin = margin - margin / 4;
+
+                        ktb.Margin = new Thickness(margin, 0, margin, 0);
+
+                        ImageBrush backBrush;
+                        if (CurrentQuestion.Answers[i].AttachImage != null)
+                        {
+                            ktb.VerticalLabelAlignment = VerticalAlignment.Bottom;
+
+                            //ktb.Height = img.Height;                       
+                            backBrush = new ImageBrush(CurrentQuestion.Answers[i].AttachImage);
+
+                        }
+                        else
+                        {
+
+                            backBrush = new ImageBrush(new BitmapImage(new Uri(
+                                "pack://application:,,,/Content/QuestionScreen/answerbg" + (i + 1) + ".png")));
+                            backBrush.Opacity = 0.4;
+                        }
+                        backBrush.Stretch = Stretch.Fill;
+                        ktb.Background = backBrush;
+                        CurrentChoices.Add(ktb);
+                    }
+                    if (CurrentIndex == EachTimeQuestionsCount)
+                    {
+                        NextButtonImage = new BitmapImage(new Uri("pack://application:,,,/Content/QuestionScreen/buttonResult.png"));
+                    }
+                    else
+                    {
+                        NextButtonImage = new BitmapImage(new Uri("pack://application:,,,/Content/QuestionScreen/buttonDown.png"));
+                    }
+                }              
+  
             }
             else
             {
@@ -610,6 +801,7 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
             RightCount = 0;
             WrongCount = 0;
 
+            //FirstLayoutVisibility = Visibility.Visible;
 
         }
 
