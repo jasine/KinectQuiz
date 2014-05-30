@@ -48,6 +48,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity" />
@@ -93,8 +94,10 @@
     <Compile Include="Navigation\INavigableContext.cs" />
     <Compile Include="Navigation\DefaultNavigableContexts.cs" />
     <Compile Include="Navigation\NavigationManager.cs" />
+    <Compile Include="Services\IEachTimeQuestionCount.cs" />
     <Compile Include="Services\IQuestionDataService.cs" />
     <Compile Include="Services\XamlDataService.cs" />
+    <Compile Include="Services\XmlCountService.cs" />
     <Compile Include="Utilities\CommandOnEventAssociation.cs" />
     <Compile Include="Utilities\CommandOnEventHelper.cs">
       <SubType>Code</SubType>
@@ -150,14 +153,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Questions\QuestionList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Page Include="Views\ResultScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Resource Include="Content\QuestionScreen\leftScroll.png" />
-    <Resource Include="Content\QuestionScreen\QustionScreenContent.xaml">
-      <SubType>Designer</SubType>
-    </Resource>
     <Page Include="Views\QuestionScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -320,11 +329,6 @@
     <Resource Include="Content\QuestionScreen\leftBg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Content\QuestionScreen\Question5\5.1.png" />
-    <Resource Include="Content\QuestionScreen\Question5\5.2.png" />
-    <Resource Include="Content\QuestionScreen\Question5\5.3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Content\QuestionScreen\buttonDown.png" />
   </ItemGroup>
   <ItemGroup>
@@ -351,15 +355,32 @@
     <Resource Include="Content\QuestionScreen\downScroll.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Content\QuestionScreen\Question3\3.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Content\QuestionScreen\frame2.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\QuestionScreen\buttonDown2.png" />
     <Resource Include="Content\QuestionScreen\buttonResult2.png" />
     <Resource Include="Content\QuestionScreen\buttonUp2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Questions\Question2\2.1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Questions\Question2\2.2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Questions\Question3\3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Questions\Question5\5.1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Questions\Question5\5.2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Questions\Question5\5.3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />

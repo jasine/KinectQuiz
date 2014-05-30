@@ -19,13 +19,14 @@ using Microsoft.Samples.Kinect.InteractionGallery.Models;
 using Microsoft.Samples.Kinect.InteractionGallery.Navigation;
 using Microsoft.Samples.Kinect.InteractionGallery.Services;
 using Microsoft.Samples.Kinect.InteractionGallery.Utilities;
+using System.Configuration;
 
 namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
 {
     [ExportNavigable(NavigableContextName = DefaultNavigableContexts.QuestionScreen)]
     class QuestionScreenViewModel : ViewModelBase
     {
-        internal const int EachTimeQuestionsCount = 4;//change here to change the question each user to answer
+        internal  int EachTimeQuestionsCount = 4;//change here to change the question each user to answer
         internal readonly double ResizeRatio ;//compared to 1920*1080
 
 
@@ -527,7 +528,8 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
         public QuestionScreenViewModel()
             : base()
         {
-
+            this.LoadFiles();
+                  
             RightScrollLen = (SystemParameters.FullPrimaryScreenWidth) * ((960 - 196) / 960.0) * 0.5;
             LeftScrollLen = -RightScrollLen+6;
             LeftMaskLen = SystemParameters.FullPrimaryScreenWidth / 2;
@@ -539,7 +541,6 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
             currentIndex = 0;
             CurrentQuestionGroup=new List<QuestionModel>();
 
-            this.LoadModels();
 
             ResizeRatio = RightScrollLen / 766;
 
@@ -712,18 +713,41 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.ViewModels
         }
 
 
-        protected void LoadModels()
-        { 
-            AllQustions = (new XamlDataService()).GetAllQuestions();
+        protected void LoadFiles()
+        {
+            try
+            {
+                AllQustions = (new XamlDataService()).GetAllQuestions();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+                Application.Current.Shutdown();
+            }
+
+            try
+            {
+                EachTimeQuestionsCount = (new XmlCountService()).GetCount();
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                Application.Current.Shutdown();
+            }
+            if (EachTimeQuestionsCount > AllQustions.Count)
+            {
+                MessageBox.Show("总问题数大于每次问答题目,请修改app.config文件");
+                Application.Current.Shutdown();
+                throw new Exception();
+            }
+
         }
 
         private void PickQuestions()
         {
-            if (EachTimeQuestionsCount > AllQustions.Count)
-            {
-                throw new Exception("总问题数大于每次问答题目");
-            }
-
             CurrentQuestionGroup.Clear();
             while (CurrentQuestionGroup.Count<EachTimeQuestionsCount)
             {

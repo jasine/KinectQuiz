@@ -12,17 +12,28 @@ namespace Microsoft.Samples.Kinect.InteractionGallery.Services
 {
     public class XamlDataService:IQuestionDataService
     {
-        internal const string DefaultQuestionScreenModelContent = "Content/QuestionScreen/QustionScreenContent.xaml";
+        internal const string DefaultQuestionScreenModelContent = "pack://siteoforigin:,,,/Questions/QuestionList.xaml";
       
 
         public List<QuestionModel> GetAllQuestions()
         {
-            Uri patUri = PackUriHelper.CreatePackUri(DefaultQuestionScreenModelContent);
+            Uri patUri = new Uri(DefaultQuestionScreenModelContent);// PackUriHelper.CreatePackUri(DefaultQuestionScreenModelContent);
             List<QuestionModel> Questions = new List<QuestionModel>();
+            FileStream fs = new FileStream("Questions/QuestionList.xaml", FileMode.Open);
 
-            using (Stream questionModelsStream = Application.GetResourceStream(patUri).Stream)
+            //using (Stream questionModelsStream = Application.GetResourceStream(patUri).Stream)
+            using (Stream questionModelsStream =fs)
             {
-                Questions = XamlServices.Load(questionModelsStream) as List<QuestionModel>;
+
+                try
+                {
+                    Questions = XamlServices.Load(questionModelsStream) as List<QuestionModel>;
+
+                }
+                catch (Exception)
+                {
+                    new Exception("无法加载问题列表或列表格式错误");
+                }
             }
             if (Questions == null)
             {

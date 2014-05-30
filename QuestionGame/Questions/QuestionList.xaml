@@ -6,10 +6,10 @@
       xmlns:c="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 >
 
-    <mskbm:QuestionModel Title="敦煌学第一部分类目录《敦煌劫馀录》是 ____ 主持修订的" 
+    <mskbm:QuestionModel Title="敦煌学第一部分类目录《敦煌劫馀录》主持修订的人是？" 
                          RightChoiceIndex="0"
                          Type="TextOnly"
-                         ExplainText="《敦煌劫馀录》是陈垣先生于XXXX年主持修订完成的  ...... ..... .... ......" >
+                         ExplainText="《敦煌劫馀录》，陈垣撰，民国二十年出版。陈寅恪为此书作序。 " >
         <mskbm:QuestionModel.Answers>
             <List x:TypeArguments="mskbm:QuestionChoiceModel">
                 <mskbm:QuestionChoiceModel Text="陈垣"></mskbm:QuestionChoiceModel>
@@ -17,33 +17,28 @@
             </List>
         </mskbm:QuestionModel.Answers>
     </mskbm:QuestionModel>
-    <mskbm:QuestionModel Title="梁思成林徽因夫妇在敦煌莫高窟第61窟五台山图中发现，随后按图索骥找到的现存最大型唐代木构建筑是___ "
+    <mskbm:QuestionModel Title="梁思成林徽因夫妇在敦煌莫高窟第61窟五台山图中发现，随后按图索骥找到的现存最大型唐代木构建筑是？ "
                          RightChoiceIndex="1" 
                          Type="ChoiceWithImage"
-                         ExplainText="佛光寺位于中国山西省五台县豆村镇佛光村，建于唐大中十一年（857年），是中国现存第二古老的木结构建筑">
+                         ExplainText="佛光寺位于中国山西省五台县豆村镇佛光村，是中国现存最大型的唐代木结构建筑，被建筑学家梁思成称为“中国第一国宝”">
         <mskbm:QuestionModel.Answers>
             <List x:TypeArguments="mskbm:QuestionChoiceModel">
-                <mskbm:QuestionChoiceModel Text="南禅寺">
+                <mskbm:QuestionChoiceModel Text="清凉寺">
                     <mskbm:QuestionChoiceModel.AttachImage>
-                        <c:BitmapImage UriSource="pack://application:,,,/Content/ArticleScreen/beach.jpg"></c:BitmapImage>
+                        <c:BitmapImage UriSource="pack://siteoforigin:,,,/Questions/Question2/2.1.png"></c:BitmapImage>
                     </mskbm:QuestionChoiceModel.AttachImage>
                 </mskbm:QuestionChoiceModel>
                 <mskbm:QuestionChoiceModel Text="佛光寺">
                     <mskbm:QuestionChoiceModel.AttachImage>
-                        <c:BitmapImage UriSource="pack://application:,,,/Content/ArticleScreen/hamlet.jpg"></c:BitmapImage>
+                        <c:BitmapImage UriSource="pack://siteoforigin:,,,/Questions/Question2/2.2.png"></c:BitmapImage>
                     </mskbm:QuestionChoiceModel.AttachImage>
                 </mskbm:QuestionChoiceModel>
-                <mskbm:QuestionChoiceModel Text="清凉寺">
-                    <mskbm:QuestionChoiceModel.AttachImage>
-                        <c:BitmapImage UriSource="pack://application:,,,/Content/ArticleScreen/sydney.jpg"></c:BitmapImage>
-
-                    </mskbm:QuestionChoiceModel.AttachImage>
-                </mskbm:QuestionChoiceModel>
+               
             </List>
         </mskbm:QuestionModel.Answers>
 
     </mskbm:QuestionModel>
-    <mskbm:QuestionModel Title="以下哪一尊塑像是在敦煌藏经洞的洪辩高僧的真容像 "
+    <mskbm:QuestionModel Title="以下哪一尊塑像是在敦煌藏经洞的洪辩高僧的真容像？ "
                          RightChoiceIndex="1" 
                          Type="ChoiceWithImage"
                          ExplainText="洪辨高僧像，是敦煌彩塑代表作之一，位于莫高窟第17窟（藏经洞）北壁前禅床上。唐大中五年至咸通三年（851-862）间塑造">
@@ -51,34 +46,34 @@
             <List x:TypeArguments="mskbm:QuestionChoiceModel">
                 <mskbm:QuestionChoiceModel >
                     <mskbm:QuestionChoiceModel.AttachImage>
-                        <c:BitmapImage UriSource="pack://application:,,,/Content/QuestionScreen/Question5/5.1.png"></c:BitmapImage>
+                        <c:BitmapImage UriSource="pack://siteoforigin:,,,/Questions/Question5/5.1.png"></c:BitmapImage>
                     </mskbm:QuestionChoiceModel.AttachImage>
                 </mskbm:QuestionChoiceModel>
                 <mskbm:QuestionChoiceModel >
                     <mskbm:QuestionChoiceModel.AttachImage>
-                        <c:BitmapImage UriSource="pack://application:,,,/Content/QuestionScreen/Question5/5.2.png"></c:BitmapImage>
+                        <c:BitmapImage UriSource="pack://siteoforigin:,,,/Questions/Question5/5.2.png"></c:BitmapImage>
 
                     </mskbm:QuestionChoiceModel.AttachImage>
                 </mskbm:QuestionChoiceModel>
                 <mskbm:QuestionChoiceModel>
                     <mskbm:QuestionChoiceModel.AttachImage>
-                        <c:BitmapImage UriSource="pack://application:,,,/Content/QuestionScreen/Question5/5.3.png"></c:BitmapImage>
+                        <c:BitmapImage UriSource="pack://siteoforigin:,,,/Questions/Question5/5.3.png"></c:BitmapImage>
                     </mskbm:QuestionChoiceModel.AttachImage>
                 </mskbm:QuestionChoiceModel>
             </List>
         </mskbm:QuestionModel.Answers>
         
     </mskbm:QuestionModel>
-    <mskbm:QuestionModel Title="中国、印度、希腊和伊斯兰四大文明体系的交汇点在___"
+    <mskbm:QuestionModel Title="中国、印度、希腊和伊斯兰四大文明体系的交汇点在？"
                          RightChoiceIndex="0" 
                          Type="TitleWithImage"
-                         ExplainText="中国、印度、希腊和伊斯兰四大文明体系的交汇点在敦煌">
+                         ExplainText="世界上历史悠久、地域广阔、自成体系、影响深远的文化体系只有四个：中国、印度、希腊、伊斯兰。而这四个文化体系汇流的地方只有一个，这就是中国的敦煌和新疆地区。">
         <mskbm:QuestionModel.AttachImage>
-            <c:BitmapImage UriSource="pack://application:,,,/Content/QuestionScreen/Question3/3.jpg"></c:BitmapImage>
+            <c:BitmapImage UriSource="pack://siteoforigin:,,,/Questions/Question3/3.jpg"></c:BitmapImage>
         </mskbm:QuestionModel.AttachImage>
         <mskbm:QuestionModel.Answers>
             <List x:TypeArguments="mskbm:QuestionChoiceModel">
-                <mskbm:QuestionChoiceModel Text="敦煌" ></mskbm:QuestionChoiceModel>
+                <mskbm:QuestionChoiceModel Text="敦煌及新疆" ></mskbm:QuestionChoiceModel>
                 <mskbm:QuestionChoiceModel Text="撒马尔罕"></mskbm:QuestionChoiceModel>
                 <mskbm:QuestionChoiceModel Text="耶路撒冷"></mskbm:QuestionChoiceModel>
             </List>
